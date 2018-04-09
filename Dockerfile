@@ -7,9 +7,6 @@ RUN apk --no-cache --no-progress upgrade && \
     adduser -D -G users -H -S -g 'Samba User' -h /tmp smbuser && \
     file="/etc/samba/smb.conf" && \
     sed -i 's|^;* *\(log file = \).*|   \1/dev/stdout|' $file && \
-    sed -i 's|^;* *\(load printers = \).*|   \1no|' $file && \
-    sed -i 's|^;* *\(printcap name = \).*|   \1/dev/null|' $file && \
-    sed -i 's|^;* *\(printing = \).*|   \1bsd|' $file && \
     sed -i 's|^;* *\(unix password sync = \).*|   \1no|' $file && \
     sed -i 's|^;* *\(preserve case = \).*|   \1yes|' $file && \
     sed -i 's|^;* *\(short preserve case = \).*|   \1yes|' $file && \
@@ -35,10 +32,7 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   recycle:keeptree = yes' >>$file && \
     echo '   recycle:versions = yes' >>$file && \
     echo '   min protocol = SMB2' >>$file && \
-    echo '   durable handles = yes' >>$file && \
     echo '   fruit:aapl = yes' >>$file && \
-    echo '   fruit:time machine = yes' >>$file && \
-    echo '   fruit:advertise_fullsync = true' >>$file && \
     echo '' >>$file && \
     echo '   [SMBTimeMachine]' >>$file && \
     echo '   path = /data' >>$file && \
@@ -49,8 +43,10 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   directory mode = 0700' >>$file && \
     echo '   kernel oplocks = no' >>$file && \
     echo '   kernel share modes = no' >>$file && \
+    echo '   durable handles = yes' >>$file && \
     echo '   posix locking = no' >>$file && \
     echo '   vfs objects = catia fruit streams_xattr' >>$file && \
+    echo '   fruit:time machine = yes' >>$file && \
     echo '' >>$file && \
     rm -rf /tmp/*
 
