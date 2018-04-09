@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER David Personette <dperson@gmail.com>
 
 # Install samba
@@ -35,6 +35,22 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   recycle:keeptree = yes' >>$file && \
     echo '   recycle:versions = yes' >>$file && \
     echo '   min protocol = SMB2' >>$file && \
+    echo '   durable handles = yes' >>$file && \
+    echo '   fruit:aapl = yes' >>$file && \
+    echo '   fruit:time machine = yes' >>$file && \
+    echo '   fruit:advertise_fullsync = true' >>$file && \
+    echo '' >>$file && \
+    echo '   [SMBTimeMachine]' >>$file && \
+    echo '   path = /data' >>$file && \
+    echo '   comment = Time Machine Backup Disk' >>$file && \
+    echo '   browsable = yes' >>$file && \
+    echo '   writable = yes' >>$file && \
+    echo '   create mode = 0600' >>$file && \
+    echo '   directory mode = 0700' >>$file && \
+    echo '   kernel oplocks = no' >>$file && \
+    echo '   kernel share modes = no' >>$file && \
+    echo '   posix locking = no' >>$file && \
+    echo '   vfs objects = catia fruit streams_xattr' >>$file && \
     echo '' >>$file && \
     rm -rf /tmp/*
 
