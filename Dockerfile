@@ -31,6 +31,7 @@ RUN apk --no-cache --no-progress upgrade && \
     echo '   comment = Time Machine Backup Disk' >>$file && \
     echo '   path = /data' >>$file && \
     echo '   fruit:time machine = yes' >>$file && \
+    echo '   fruit:time machine max size = 500G' >>$file && \
     echo '   vfs objects = catia fruit streams_xattr' >>$file && \
     echo '   browsable = yes' >>$file && \
     echo '   writable = yes' >>$file && \
