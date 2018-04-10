@@ -12,41 +12,30 @@ RUN apk --no-cache --no-progress upgrade && \
     sed -i 's|^;* *\(short preserve case = \).*|   \1yes|' $file && \
     sed -i 's|^;* *\(default case = \).*|   \1lower|' $file && \
     sed -i '/Share Definitions/,$d' $file && \
-    echo '   pam password change = yes' >>$file && \
-    echo '   map to guest = bad user' >>$file && \
-    echo '   usershare allow guests = yes' >>$file && \
-    echo '   create mask = 0664' >>$file && \
-    echo '   force create mode = 0664' >>$file && \
-    echo '   directory mask = 0775' >>$file && \
-    echo '   force directory mode = 0775' >>$file && \
+    echo ';   pam password change = yes' >>$file && \
+    echo ';   map to guest = bad user' >>$file && \
+    echo ';   usershare allow guests = yes' >>$file && \
+    echo ';   create mask = 0664' >>$file && \
+    echo ';   force create mode = 0664' >>$file && \
+    echo ';   directory mask = 0775' >>$file && \
+    echo ';   force directory mode = 0775' >>$file && \
     echo '   force user = smbuser' >>$file && \
     echo '   force group = users' >>$file && \
-    echo '   follow symlinks = yes' >>$file && \
-    echo '   load printers = no' >>$file && \
-    echo '   printing = bsd' >>$file && \
-    echo '   printcap name = /dev/null' >>$file && \
-    echo '   disable spoolss = yes' >>$file && \
-    echo '   socket options = TCP_NODELAY' >>$file && \
-    echo '   strict locking = no' >>$file && \
-    echo '   vfs objects = recycle' >>$file && \
-    echo '   recycle:keeptree = yes' >>$file && \
-    echo '   recycle:versions = yes' >>$file && \
+    echo ';   follow symlinks = yes' >>$file && \
+    echo ';   socket options = TCP_NODELAY' >>$file && \
+    echo ';   strict locking = no' >>$file && \
     echo '   min protocol = SMB2' >>$file && \
     echo '   fruit:aapl = yes' >>$file && \
     echo '' >>$file && \
     echo '   [SMBTimeMachine]' >>$file && \
-    echo '   path = /data' >>$file && \
     echo '   comment = Time Machine Backup Disk' >>$file && \
+    echo '   path = /data' >>$file && \
+    echo '   fruit:time machine = yes' >>$file && \
+    echo '   vfs objects = catia fruit streams_xattr' >>$file && \
     echo '   browsable = yes' >>$file && \
     echo '   writable = yes' >>$file && \
-    echo '   create mode = 0600' >>$file && \
-    echo '   directory mode = 0700' >>$file && \
-    echo '   kernel oplocks = no' >>$file && \
-    echo '   kernel share modes = no' >>$file && \
-    echo '   durable handles = yes' >>$file && \
-    echo '   posix locking = no' >>$file && \
-    echo '   vfs objects = catia fruit streams_xattr' >>$file && \
-    echo '   fruit:time machine = yes' >>$file && \
+    echo ';   create mode = 0600' >>$file && \
+    echo ';   directory mode = 0700' >>$file && \
     echo '' >>$file && \
     rm -rf /tmp/*
 
